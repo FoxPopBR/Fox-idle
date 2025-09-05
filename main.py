@@ -12,8 +12,11 @@ def main():
     clock = pygame.time.Clock()
     font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)
 
+    # habilita key repeat (mantém comportamento de repetir teclas)
+    pygame.key.set_repeat(400, 40)
+
     chat_window = ChatWindow(screen)
-    input_box = InputBox(screen)
+    input_box = InputBox(screen, chat_window)  # Passa chat_window como argumento
     gui_regions = GUIRegions(screen, chat_window, input_box)
 
     active_area = 'input'
@@ -56,6 +59,7 @@ def main():
                 sent = input_box.process_event(event)
                 if sent is not None and sent != "":
                     chat_window.add_message("user", sent)
+                    # bot responde "N/D"
                     chat_window.add_message("bot", "N/D")
 
         # updates

@@ -6,10 +6,12 @@ from config import (
     SCROLLBAR_WIDTH, BLACK, BORDER_COLOR
 )
 from scrollable_panel import ScrollablePanel
+from chat_window import ChatWindow  # Adicionado para acesso a get_game_info_rect
 
 class InputBox:
-    def __init__(self, surface):
+    def __init__(self, surface, chat_window):
         self.surface = surface
+        self.chat_window = chat_window  # Referência para calcular o y correto
         self.font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)
         self.line_height = FONT_SIZE + 6
         # text_lines represents the visible lines (including wrapped lines)
@@ -27,9 +29,10 @@ class InputBox:
         self.update_rects()
 
     def get_input_rect(self):
-        # bottom area is INPUT_HEIGHT_RATIO of the screen, but use absolute from rect calc in main
-        y = int(self.surface.get_height() * (1.0 - 0.12))
-        height = int(self.surface.get_height() * 0.12) - MARGIN
+        # Posiciona a input com 5 pixels de margem acima, após o fim da região game_info
+        game_info_bottom = self.chat_window.get_game_info_rect().bottom
+        y = game_info_bottom + MARGIN  # Margem de 5 pixels acima da input
+        height = int(self.surface.get_height() * 0.12) - 2 * MARGIN  # Ajusta altura com margens internas
         width = self.surface.get_width() - 2 * MARGIN
         return pygame.Rect(MARGIN, y, width, height)
 
