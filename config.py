@@ -3,7 +3,7 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 FPS = 60
 
-FONT_NAME = "arial"
+FONT_NAME = "segoeuiemoji"
 FONT_SIZE = 18
 
 # Cores

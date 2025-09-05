@@ -119,10 +119,18 @@ class ScrollablePanel:
         y = 0
         for text, color in self.lines[start:end]:
             try:
-                rendered = font.render(text, True, color)
+                # se a string está vazia, renderizamos um espaço para evitar erro
+                if not text:
+                    rendered = font.render(" ", True, color)
+                else:
+                    rendered = font.render(text, True, color)
             except Exception:
-                safe = ''.join(ch for ch in text if ord(ch) < 10000)
+                # fallback: remover caracteres estranhos
+                safe = ''.join(ch for ch in text if 32 <= ord(ch) < 0x10FFFF)
+                if not safe:
+                    safe = " "  # evita zero width
                 rendered = font.render(safe, True, color)
+
             panel_surf.blit(rendered, (0, y))
             y += self.line_height
 
