@@ -1,0 +1,10 @@
+{
+    "python.defaultInterpreterPath": "C:/Users/Fabio/Envs/FX/Scripts/python.exe",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell-FX": {
+            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": ["-NoExit", "-Command", "C:/Users/Fabio/Envs/FX/Scripts/activate.ps1"]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell-FX"
+}
